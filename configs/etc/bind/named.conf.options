@@ -1,3 +1,13 @@
+acl goodclients {
+	10.0.0.0/24;
+	localhost;
+	localnets;
+};
+
+statistics-channels {
+	inet 10.0.0.1 port 8080 allow { goodclients; };
+};
+
 options {
 	directory "/var/cache/bind";
 
@@ -10,15 +20,30 @@ options {
 	// Uncomment the following block, and insert the addresses replacing 
 	// the all-0's placeholder.
 
-	// forwarders {
-	// 	0.0.0.0;
-	// };
+	#forwarders {
+	#	8.8.8.8;
+	#	8.8.4.4;
+	#};
+	#forward only;
 
 	//========================================================================
 	// If BIND logs error messages about the root key being expired,
 	// you will need to update your keys.  See https://www.isc.org/bind-keys
 	//========================================================================
+	dnssec-enable yes;
 	dnssec-validation auto;
+	
+	recursion yes;
+	
+	allow-query { goodclients; };
 
-	listen-on-v6 { any; };
+	auth-nxdomain no;    # conform to RFC1035
+
+	listen-on-v6 { none; };
+	listen-on port 5353 { 127.0.0.1; 10.0.0.1; };
+	
+	version none;
+
+	#filter-aaaa-on-v4 yes;
 };
+
