@@ -1,0 +1,11 @@
+#!/bin/sh
+set -e
+
+case "$2" in
+up)
+	/scripts/tunes.sh ethlinkup
+	;;
+down)
+	/scripts/tunes.sh ethlinkdown
+	;;
+esac
