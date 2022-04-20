@@ -11,6 +11,8 @@
 #
 # By default this script does nothing.
 
+/scripts/onboot.sh
+
 # Print the IP address
 _IP=$(hostname -I) || true
 if [ "$_IP" ]; then
