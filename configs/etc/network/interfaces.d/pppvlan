@@ -1,0 +1,14 @@
+
+
+auto eth1.101
+
+iface eth1.101 inet manual
+#	up pon myisp
+	pre-down poff myisp
+#	vlan-raw-device eth1
+
+#auto myisp
+iface myisp inet ppp
+	pre-up ifup eth1.101
+#	pre-down poff myisp
+	provider myisp

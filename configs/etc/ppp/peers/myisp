@@ -1,0 +1,25 @@
+# PPPoE connection
+# Connects through VLAN (eth1.101)
+# NOTE: VLAN interface must have an IP! Otherwise it will say the interface is down.
+# Setting the IP to 0.0.0.0 is fine, see /etc/dhcpcd.conf
+
+noipdefault
+defaultroute
+replacedefaultroute
+hide-password
+lcp-echo-interval 5
+lcp-echo-failure 3
+noauth
+persist
+mtu 1492
+#mru 1000
+maxfail 0
+holdoff 8
+plugin rp-pppoe.so eth1.101
+user "USERNAME@ISP.net"
+unit 1
+linkname myisp
+ipparam myisp
+logfile /var/log/ppp/myisp.log
+#usepeerdns
+#debug

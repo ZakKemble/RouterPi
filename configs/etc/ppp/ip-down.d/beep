@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# # These variables are for the use of the scripts run by run-parts
+# PPP_IFACE="$1"
+# PPP_TTY="$2"
+# PPP_SPEED="$3"
+# PPP_LOCAL="$4"
+# PPP_REMOTE="$5"
+# PPP_IPPARAM="$6"
+
+/scripts/tunes.sh pppdown
