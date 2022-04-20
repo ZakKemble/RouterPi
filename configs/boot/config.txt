@@ -68,6 +68,49 @@ arm_64bit=1
 # Disable compensation for displays with overscan
 disable_overscan=1
 
+
+# Speedup the boot process
+force_eeprom_read=0
+disable_poe_fan=1
+boot_delay=0
+initial_turbo=10
+start_cd=1
+
+# Reduce GPU frequency to save power
+# core_freq_min and gpu_freq_min are the only options that seem to have any effect on idle power consumption
+core_freq_min=60
+gpu_freq_min=60
+
+# https://github.com/raspberrypi/firmware/blob/master/boot/overlays/README
+
+# Disable bluetooth
+dtoverlay=disable-bt
+
+# Enable I2C for BME280 sensor and DS3231 RTC
+dtparam=i2c_vc=on
+dtoverlay=i2c1
+dtoverlay=i2c-sensor,bme280,addr=0x76
+dtoverlay=i2c-rtc,ds3231
+
+# Shutdown button
+dtoverlay=gpio-shutdown,gpio_pin=4
+
+# Use external WiFi antenna
+dtparam=ant2
+
+# Setting 'pwr_led_trigger' to 'cpu' causes excessive CPU usage, but using 'act_led_trigger' works fine
+# 'cpu' doesn't work with 64-bit kernel https://github.com/raspberrypi/linux/issues/4425
+dtparam=act_led_trigger=cpu
+dtparam=pwr_led_trigger=mmc0
+
+# https://diode.io/raspberry%20pi/running-forever-with-the-raspberry-pi-hardware-watchdog-20202/
+#dtparam=watchdog=on
+
+# Set GPU memory to 32MB
+# Can go down to 16MB, but some errors will appear in dmesg during boot. They're not a problem, though.
+gpu_mem=32
+#hdmi_enable_4kp60=1
+
 [cm4]
 # Enable host mode on the 2711 built-in XHCI USB controller.
 # This line should be removed if the legacy DWC2 controller is required

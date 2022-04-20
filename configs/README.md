@@ -18,9 +18,6 @@ boot_delay=0
 initial_turbo=10
 start_cd=1
 
-# 64-bit mode
-arm_64bit=1
-
 # Reduce GPU frequency to save power
 # core_freq_min and gpu_freq_min are the only options that seem to have any effect on idle power consumption
 core_freq_min=60
@@ -30,11 +27,6 @@ gpu_freq_min=60
 
 # Disable bluetooth
 dtoverlay=disable-bt
-
-# Enable USB
-#dtoverlay=dwc-otg
-dtoverlay=dwc2,dr_mode=host
-#otg_mode=1
 
 # Enable I2C for BME280 sensor and DS3231 RTC
 dtparam=i2c_vc=on
