@@ -4,7 +4,7 @@ Another Raspberry Pi router!
 
 https://blog.zakkemble.net/routerpi-compute-module-4-router/
 
-![RouterPi pic](images/routerpi.png "")
+![RouterPi pic](images/routerpi.jpg "")
 
 --------
 
