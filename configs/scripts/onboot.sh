@@ -20,6 +20,10 @@ echo 4 | sudo tee /proc/irq/${ETH_IRQS[1]}/smp_affinity
 # Configure CPU affinity for packet queues
 echo 8 | sudo tee /sys/class/net/eth1/queues/rx-0/rps_cpus
 
+# Enable interrupt coalescing
+ethtool -C eth0 rx-usecs 100 rx-frames 10
+ethtool -C eth1 rx-usecs 100 rx-frames 10 tx-usecs 100 tx-frames 10
+
 # Load NAT/firewall rules
 ./firewall.sh
 
