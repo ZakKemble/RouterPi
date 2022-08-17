@@ -66,7 +66,7 @@ sudo raspi-config
 			No
 ```
 
-## Disable swapfile
+## Disable swapfile & man-db
 
 Router things don't use much RAM so no need for swap. Disabling the swapfile can help reduce the number of writes to flash in case the kernel does decide to move some stuff into it.
 
@@ -76,7 +76,14 @@ sudo dphys-swapfile uninstall
 sudo systemctl disable dphys-swapfile
 ```
 
-**REBOOT**
+Manuals aren't really needed and it just slows down the update process when they're regenerated. I'm not sure how 'safe' is it to completely remove the man-db package with `sudo apt remove man-db`, so instead we'll just replace the executable with a dummy.
+
+```
+sudo mv /usr/bin/mandb /usr/bin/mandb-disable
+sudo ln -s /bin/true /usr/bin/mandb
+sudo rm -r /var/cache/man
+sudo apt-mark hold man-db
+```
 
 ## Update Packages
 
